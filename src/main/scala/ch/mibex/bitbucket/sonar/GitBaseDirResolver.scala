@@ -6,6 +6,7 @@ import org.sonar.api.batch.fs.InputFile
 import org.sonar.api.batch.postjob.issue.PostJobIssue
 import org.sonar.api.batch.{BatchSide, InstantiationStrategy}
 import org.sonar.api.scan.filesystem.PathResolver
+import org.sonar.api.utils.log.Loggers
 
 import scala.annotation.tailrec
 
@@ -14,14 +15,15 @@ import scala.annotation.tailrec
 // the git root (.git folder)
 @BatchSide
 @InstantiationStrategy(InstantiationStrategy.PER_BATCH)
-class GitBaseDirResolver {
+class GitBaseDirResolver (pluginConfig: SonarBBPluginConfig) {
   private var gitBaseDir: File = _
 
   def init(startDir: File, gitDirName: String = ".git"): Unit = {
     gitBaseDir = findRepositoryBaseDir(Option(startDir), gitDirName).getOrElse(
+      findRepositoryBaseDir(Option(new File(pluginConfig.gitBaseDir())), gitDirName).getOrElse(
       throw new IllegalArgumentException(
         s"${SonarBBPlugin.PluginLogPrefix} Unable to locate Git directory in ${startDir.getAbsolutePath}"
-      )
+      ))
     )
   }
 

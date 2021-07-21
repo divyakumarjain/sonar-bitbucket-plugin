@@ -11,7 +11,7 @@
 
     <groupId>ch.mibex.bitbucket</groupId>
     <artifactId>sonar-bitbucket-plugin</artifactId>
-    <version>1.2.3</version>
+    <version>1.3.0</version>
     <packaging>sonar-plugin</packaging>
     <name>Sonar Bitbucket Cloud Plugin</name>
 
@@ -47,7 +47,7 @@
     </repositories>
 
     <properties>
-        <sonar.version>5.6</sonar.version>
+        <sonar.version>6.7</sonar.version>
         <sonar.pluginKey>sonarbitbucket</sonar.pluginKey>
         <sonar.pluginName>Bitbucket for Sonar</sonar.pluginName>
         <sonar.pluginClass>ch.mibex.bitbucket.sonar.SonarBBPlugin</sonar.pluginClass>
@@ -123,6 +123,12 @@
         </dependency>
 
         <!-- Unit tests -->
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.11</artifactId>
+            <version>3.0.7</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.specs2</groupId>
             <artifactId>specs2_${scala.version}</artifactId>
